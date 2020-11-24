@@ -1,4 +1,4 @@
-package resources.ModelAndController;
+package resources.Game;
 
 import resources.View.GUI;
 

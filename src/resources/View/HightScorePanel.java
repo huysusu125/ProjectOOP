@@ -1,6 +1,6 @@
 package resources.View;
 
-import resources.ModelAndController.HightScore;
+import resources.Game.HightScore;
 
 import javax.swing.*;
 import java.awt.*;

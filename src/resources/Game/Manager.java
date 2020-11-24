@@ -1,4 +1,4 @@
-package resources.ModelAndController;
+package resources.Game;
 
 import sound.GameSound;
 
@@ -153,7 +153,7 @@ public class Manager {
             return;
         }
         GameSound.getIstance().getAudio(GameSound.BOMB).play();
-        Bomb mBomb = new Bomb(x, y, mBomber.getSizeBomb(), 3000);
+        Bomb mBomb = new Bomb(x, y, mBomber.getSizeBomb(), 1000);
         arrBomb.add(mBomb);
     }
 

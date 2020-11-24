@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 
 public class GUI extends JFrame{
 	public static final int WIDTHJF = 905;
-	public static final int HEIGHTJF = 610;
+	public static final int HEIGHTJF = 630;
 	private MyContainer mContainer;
 
 	public GUI() {

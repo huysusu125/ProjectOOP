@@ -1,7 +1,7 @@
 package resources.View;
 
-import resources.ModelAndController.Bomber;
-import resources.ModelAndController.Manager;
+import resources.Game.Bomber;
+import resources.Game.Manager;
 
 import javax.swing.*;
 import java.awt.*;

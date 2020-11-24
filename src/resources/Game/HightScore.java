@@ -1,4 +1,4 @@
-package resources.ModelAndController;
+package resources.Game;
 
 public class HightScore {
     private String name;
