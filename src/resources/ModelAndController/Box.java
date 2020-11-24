@@ -1,4 +1,4 @@
-package resources.ModelViewModel;
+package resources.ModelAndController;
 
 import javax.swing.*;
 import java.awt.*;

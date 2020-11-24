@@ -1,4 +1,4 @@
-package resources.ModelViewModel;
+package resources.ModelAndController;
 
 import sound.GameSound;
 
@@ -143,8 +143,8 @@ public class Manager {
         }
         int x = mBomber.getX() + mBomber.getWidth() / 2;
         int y = mBomber.getY() + mBomber.getHeart() / 2;
-        for (int i = 0; i < arrBomb.size(); i++) {
-            if (arrBomb.get(i).isImpact(x, y)) {
+        for (Bomb bomb : arrBomb) {
+            if (bomb.isImpact(x, y)) {
                 return;
             }
         }
@@ -216,20 +216,20 @@ public class Manager {
     }
 
     public void drawAllItem(Graphics2D g2d) {
-        for (int i = 0; i < arrItem.size(); i++) {
-            arrItem.get(i).drawItem(g2d);
+        for (Item item : arrItem) {
+            item.drawItem(g2d);
         }
     }
 
     public void drawAllBox(Graphics2D g2d) {
-        for (int i = 0; i < arrBox.size(); i++) {
-            arrBox.get(i).drawBox(g2d);
+        for (Box box : arrBox) {
+            box.drawBox(g2d);
         }
     }
 
     public void drawAllShawDow(Graphics2D g2d) {
-        for (int i = 0; i < arrShawDow.size(); i++) {
-            arrShawDow.get(i).drawBox(g2d);
+        for (Box box : arrShawDow) {
+            box.drawBox(g2d);
         }
     }
 
@@ -265,23 +265,23 @@ public class Manager {
     }
 
     public void drawAllBomb(Graphics2D g2d) {
-        for (int i = 0; i < arrBomb.size(); i++) {
-            arrBomb.get(i).drawActor(g2d);
+        for (Bomb bomb : arrBomb) {
+            bomb.drawActor(g2d);
         }
-        for (int i = 0; i < arrBombBang.size(); i++) {
-            arrBombBang.get(i).drawBongBang(g2d);
+        for (BombBang bombBang : arrBombBang) {
+            bombBang.drawBongBang(g2d);
         }
     }
 
     public void drawAllMonster(Graphics2D g2d) {
-        for (int i = 0; i < arrMonster.size(); i++) {
-            arrMonster.get(i).drawActor(g2d);
+        for (Monster monster : arrMonster) {
+            monster.drawActor(g2d);
         }
     }
 
     public void drawBoss(Graphics2D g2d) {
-        for (int i = 0; i < arrMonster.size(); i++) {
-            arrMonster.get(i).drawBoss(g2d);
+        for (Monster monster : arrMonster) {
+            monster.drawBoss(g2d);
         }
     }
 
@@ -311,8 +311,8 @@ public class Manager {
     }
 
     public void checkDead() {
-        for (int i = 0; i < arrBombBang.size(); i++) {
-            if (arrBombBang.get(i).isImpactBombBangVsActor(mBomber) && mBomber.getStatus() == Bomber.ALIVE) {
+        for (BombBang bombBang : arrBombBang) {
+            if (bombBang.isImpactBombBangVsActor(mBomber) && mBomber.getStatus() == Bomber.ALIVE) {
                 Image icon = new ImageIcon(getClass().getResource(
                         "/Images/bomber_dead.png")).getImage();
                 mBomber.setImg(icon);
@@ -324,8 +324,8 @@ public class Manager {
                 GameSound.instance.getAudio(GameSound.BOMBER_DIE).play();
             }
         }
-        for (int i = 0; i < arrMonster.size(); i++) {
-            if (mBomber.isImpactBomberVsActor(arrMonster.get(i))) {
+        for (Monster monster : arrMonster) {
+            if (mBomber.isImpactBomberVsActor(monster)) {
                 Image icon = new ImageIcon(getClass().getResource(
                         "/Images/ghost.png")).getImage();
                 mBomber.setImg(icon);
@@ -373,9 +373,9 @@ public class Manager {
                 arrBomb.remove(i);
             }
         }
-        for (int j = 0; j < arrMonster.size(); j++) {
+        for (Monster monster : arrMonster) {
             for (int i = 0; i < arrBomb.size(); i++) {
-                if (arrBomb.get(i).isImpactBombvsActor(arrMonster.get(j)) == 2) {
+                if (arrBomb.get(i).isImpactBombvsActor(monster) == 2) {
                     BombBang bomBang = new BombBang(arrBomb.get(i).getX(), arrBomb
                             .get(i).getY(), arrBomb.get(i).getSize(), arrBox);
                     GameSound.getIstance().getAudio(GameSound.BONG_BANG).play();
@@ -418,17 +418,17 @@ public class Manager {
                 arrBombBang.remove(k);
             }
         }
-        for (int i = 0; i < arrBombBang.size(); i++) {
+        for (BombBang bang : arrBombBang) {
             for (int j = 0; j < arrBox.size(); j++) {
-                if (arrBombBang.get(i).isImpactBombBangvsBox(arrBox.get(j))) {
+                if (bang.isImpactBombBangvsBox(arrBox.get(j))) {
                     arrBox.remove(j);
                     arrShawDow.remove(j);
                 }
             }
         }
-        for (int i = 0; i < arrBombBang.size(); i++) {
+        for (BombBang bombBang : arrBombBang) {
             for (int j = 0; j < arrItem.size(); j++) {
-                if (arrBombBang.get(i).isImpactBombBangvsItem(arrItem.get(j))) {
+                if (bombBang.isImpactBombBangvsItem(arrItem.get(j))) {
                     arrItem.remove(j);
                 }
             }
@@ -461,17 +461,17 @@ public class Manager {
     }
 
     public void changeOrientAll() {
-        for (int i = 0; i < arrMonster.size(); i++) {
+        for (Monster monster : arrMonster) {
             int orient = random.nextInt(4) + 1;
-            arrMonster.get(i).changeOrient(orient);
+            monster.changeOrient(orient);
         }
     }
 
     public void moveAllMonster(int count) {
-        for (int i = 0; i < arrMonster.size(); i++) {
-            if (arrMonster.get(i).move(count, arrBomb, arrBox) == false) {
+        for (Monster monster : arrMonster) {
+            if (monster.move(count, arrBomb, arrBox) == false) {
                 int orient = random.nextInt(4) + 1;
-                arrMonster.get(i).changeOrient(orient);
+                monster.changeOrient(orient);
             }
         }
     }
@@ -505,8 +505,8 @@ public class Manager {
 
         try {
             FileOutputStream fileOutput = new FileOutputStream("src/hightscore/HightScore.txt");
-            for (int i = 0; i < arrHightScore.size(); i++) {
-                String content = arrHightScore.get(i).getName() + ":" + arrHightScore.get(i).getScore() + "\n";
+            for (HightScore hightScore : arrHightScore) {
+                String content = hightScore.getName() + ":" + hightScore.getScore() + "\n";
                 fileOutput.write(content.getBytes());
             }
         } catch (IOException e) {

@@ -1,6 +1,6 @@
 package resources.View;
 
-import resources.ModelViewModel.HightScore;
+import resources.ModelAndController.HightScore;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class HightScorePanel extends JPanel implements ActionListener{
 	private final MyContainer mContainer;
-	private Image backgroundImage;
+
 	private JButton btn_ok;
 	private ArrayList<HightScore> arrHightScore;
 	

@@ -1,4 +1,4 @@
-package resources.ModelViewModel;
+package resources.ModelAndController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ public class BombBang {
 	private int x,y,size,timeLine;
 	private Image img_left, img_right, img_up, img_down;
 	
+	//bom nổ
 	public BombBang(int x, int y, int size, ArrayList<Box> arrBox) {
 		this.x=x;
 		this.y=y;
@@ -19,18 +20,18 @@ public class BombBang {
 		img_down = new ImageIcon(getClass().getResource("/Images/bombbang_down_1.png")).getImage();
 		for(int i=1;i<size;i++){
 			int tmp_left=0, tmp_right=0 ,tmp_up=0 ,tmp_dow=0 ;
-			for(int j=0;j<arrBox.size();j++){
-				if(isImpactBox(x-(i)*45, y, (i+1)*45, 45, arrBox.get(j))){
-					tmp_left=1;
+			for (Box box : arrBox) {
+				if (isImpactBox(x - (i) * 45, y, (i + 1) * 45, 45, box)) {
+					tmp_left = 1;
 				}
-				if(isImpactBox(x, y, (i+1)*45, 45, arrBox.get(j))){
-					tmp_right=1;
+				if (isImpactBox(x, y, (i + 1) * 45, 45, box)) {
+					tmp_right = 1;
 				}
-				if(isImpactBox(x, y-(i*45), 45, (i+1)*45, arrBox.get(j))){
-					tmp_up=1;
+				if (isImpactBox(x, y - (i * 45), 45, (i + 1) * 45, box)) {
+					tmp_up = 1;
 				}
-				if(isImpactBox(x, y, 45, (i+1)*45, arrBox.get(j))){
-					tmp_dow=1;
+				if (isImpactBox(x, y, 45, (i + 1) * 45, box)) {
+					tmp_dow = 1;
 				}
 			}
 			if(tmp_left==0){

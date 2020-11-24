@@ -1,7 +1,7 @@
 package resources.View;
 
-import resources.ModelViewModel.Bomber;
-import resources.ModelViewModel.Manager;
+import resources.ModelAndController.Bomber;
+import resources.ModelAndController.Manager;
 
 import javax.swing.*;
 import java.awt.*;

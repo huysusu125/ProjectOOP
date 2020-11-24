@@ -1,4 +1,4 @@
-package resources.ModelViewModel;
+package resources.ModelAndController;
 
 import resources.View.GUI;
 
@@ -42,7 +42,7 @@ public class Actor {
     protected int x, y, type, orient, speed, width, height, runBomb;
     protected Image img;
 
-
+    // dựng hình ảnh tác nhân
     public void drawActor(Graphics2D g2d) {
         switch (type) {
             case BOMBER:
@@ -60,6 +60,7 @@ public class Actor {
         }
     }
 
+    // di chuyển cho người chơi
     public boolean move(int count, ArrayList<Bomb> arrBomb, ArrayList<Box> arrBox) {
         if (count % speed != 0) {
             return true;
@@ -70,14 +71,14 @@ public class Actor {
                     return false;
                 }
                 x = x - 1;
-                for (int i = 0; i < arrBomb.size(); i++) {
-                    if (arrBomb.get(i).isImpactBombvsActor(this) == 1) {
+                for (Bomb bomb : arrBomb) {
+                    if (bomb.isImpactBombvsActor(this) == 1) {
                         x = x + 1;
                         return false;
                     }
                 }
-                for (int i = 0; i < arrBox.size(); i++) {
-                    int kq = arrBox.get(i).isImpactBoxvsActor(this);
+                for (Box box : arrBox) {
+                    int kq = box.isImpactBoxvsActor(this);
                     if (kq != 0) {
                         if (kq >= -20 && kq <= 20) {
                             if (kq > 0) {
@@ -96,14 +97,14 @@ public class Actor {
                     return false;
                 }
                 x = x + 1;
-                for (int i = 0; i < arrBomb.size(); i++) {
-                    if (arrBomb.get(i).isImpactBombvsActor(this) == 1) {
+                for (Bomb bomb : arrBomb) {
+                    if (bomb.isImpactBombvsActor(this) == 1) {
                         x = x - 1;
                         return false;
                     }
                 }
-                for (int i = 0; i < arrBox.size(); i++) {
-                    int kq = arrBox.get(i).isImpactBoxvsActor(this);
+                for (Box box : arrBox) {
+                    int kq = box.isImpactBoxvsActor(this);
                     if (kq != 0) {
                         if (kq >= -20 && kq <= 20) {
                             if (kq > 0) {
@@ -122,14 +123,14 @@ public class Actor {
                     return false;
                 }
                 y = y - 1;
-                for (int i = 0; i < arrBomb.size(); i++) {
-                    if (arrBomb.get(i).isImpactBombvsActor(this) == 1) {
+                for (Bomb bomb : arrBomb) {
+                    if (bomb.isImpactBombvsActor(this) == 1) {
                         y = y + 1;
                         return false;
                     }
                 }
-                for (int i = 0; i < arrBox.size(); i++) {
-                    int kq = arrBox.get(i).isImpactBoxvsActor(this);
+                for (Box box : arrBox) {
+                    int kq = box.isImpactBoxvsActor(this);
                     if (kq != 0) {
                         if (kq >= -20 && kq <= 20) {
                             if (kq > 0) {
@@ -148,14 +149,14 @@ public class Actor {
                     return false;
                 }
                 y = y + 1;
-                for (int i = 0; i < arrBomb.size(); i++) {
-                    if (arrBomb.get(i).isImpactBombvsActor(this) == 1) {
+                for (Bomb bomb : arrBomb) {
+                    if (bomb.isImpactBombvsActor(this) == 1) {
                         y = y - 1;
                         return false;
                     }
                 }
-                for (int i = 0; i < arrBox.size(); i++) {
-                    int kq = arrBox.get(i).isImpactBoxvsActor(this);
+                for (Box box : arrBox) {
+                    int kq = box.isImpactBoxvsActor(this);
                     if (kq != 0) {
                         if (kq >= -20 && kq <= 20) {
                             if (kq > 0) {
@@ -176,6 +177,7 @@ public class Actor {
         return true;
     }
 
+    //thay đổi phương hướng
     public void changeOrient(int orient) {
         this.orient = orient;
     }
